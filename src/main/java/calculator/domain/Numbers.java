@@ -18,15 +18,29 @@ public class Numbers {
         } else {
             strings = rawInput.substring(5).split(sep);
         }
+
         validate(strings);
 
         numbers = strings;
     }
 
     private void validate(String[] strings) {
+
         for (String s : strings) {
-            if (Integer.parseInt(s) < 0) {
-                throw new IllegalArgumentException();
+            if (s.isBlank()) {
+                throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");
+            }
+
+            int value;
+
+            try {
+                value = Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+            }
+
+            if (value < 0) {
+                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
             }
         }
     }
