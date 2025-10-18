@@ -1,7 +1,7 @@
 package calculator;
 
-import calculator.View.InputView;
-import calculator.View.OutputView;
+import calculator.view.InputView;
+import calculator.view.OutputView;
 import calculator.domain.Numbers;
 import calculator.dto.RequestDto;
 import calculator.dto.ResponseDto;

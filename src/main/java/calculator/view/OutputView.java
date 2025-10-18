@@ -1,4 +1,4 @@
-package calculator.View;
+package calculator.view;
 
 import calculator.dto.ResponseDto;
 
