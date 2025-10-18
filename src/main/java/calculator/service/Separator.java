@@ -1,25 +1,31 @@
 package calculator.service;
 
 import calculator.dto.RequestDto;
+import java.util.regex.Pattern;
 
 public class Separator {
 
     private String separator;
 
-    public void extract(RequestDto requestDto) {
-        if (requestDto.getRawInput().charAt(0) == '/' && requestDto.getRawInput().charAt(1) == '/'
-                && requestDto.getRawInput().charAt(3) == '\\' && requestDto.getRawInput().charAt(4) == 'n') {
+    public Separator() {
+        separator = "[,|:]";
+    }
 
-            validate(requestDto);
-            separator = String.valueOf(requestDto.getRawInput().charAt(2));
-        }
-        else {
-            separator = "[,|:]";
+    public void extract(RequestDto requestDto) {
+        String rawInput = requestDto.getRawInput();
+
+        if (rawInput.startsWith("//")
+                && rawInput.indexOf("\\n") == 3) {
+
+            char delim = rawInput.charAt(2);
+            validate(delim);
+
+            separator = Pattern.quote(String.valueOf(delim));
         }
     }
 
-    private static void validate(RequestDto requestDto) {
-        if (Character.isDigit(requestDto.getRawInput().charAt(2))) {
+    private static void validate(char delim) {
+        if (Character.isDigit(delim)) {
             throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
         }
     }
