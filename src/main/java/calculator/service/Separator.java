@@ -20,7 +20,7 @@ public class Separator {
 
     private static void validate(RequestDto requestDto) {
         if (Character.isDigit(requestDto.getRawInput().charAt(2))) {
-            throw new IllegalStateException("커스텀 구분자는 숫자가 될 수 없습니다.");
+            throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
         }
     }
 
