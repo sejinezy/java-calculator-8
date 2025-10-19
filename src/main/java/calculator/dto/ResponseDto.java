@@ -2,7 +2,7 @@ package calculator.dto;
 
 public class ResponseDto {
 
-    private int sum;
+    private final int sum;
 
     public ResponseDto(int sum) {
         this.sum = sum;
