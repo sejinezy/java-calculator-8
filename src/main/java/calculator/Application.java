@@ -1,5 +1,6 @@
 package calculator;
 
+import calculator.boundary.InputNormalizer;
 import calculator.service.Separator;
 import calculator.service.Separator.Result;
 import calculator.view.InputView;
@@ -16,7 +17,8 @@ public class Application {
 
         InputView.guide();
         String rawInput = Console.readLine();
-        RequestDto requestDto = new RequestDto(rawInput);
+        String normalized = InputNormalizer.normalizeBlankToZero(rawInput);
+        RequestDto requestDto = new RequestDto(normalized);
 
         Result result = Separator.extract(requestDto.getRawInput());
 
