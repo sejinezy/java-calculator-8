@@ -20,7 +20,7 @@ public class DefaultSeparator implements Separator {
 
             String regex = Pattern.quote(String.valueOf(delim));
 
-            int index = rawInput.indexOf("\\n");
+            int index = rawInput.indexOf(CUSTOM_END_HEADER);
             String numbersPart = rawInput.substring(index + 2);
 
             return new Result(regex, numbersPart);
