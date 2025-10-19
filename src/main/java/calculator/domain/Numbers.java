@@ -4,15 +4,9 @@ public class Numbers {
 
     private final int[] numbers;
 
-    public Numbers(String rawInput, String separator) {
+    public Numbers(String regex, String numbersPart) {
         String[] tokens;
-
-        if (separator.equals("[,|:]")) {
-            tokens = rawInput.split(separator);
-        } else {
-            int index = rawInput.indexOf("\\n");
-            tokens = rawInput.substring(index + 2).split(separator);
-        }
+        tokens = numbersPart.split(regex);
         numbers = parseAndValidate(tokens);
     }
 
@@ -45,6 +39,6 @@ public class Numbers {
     }
 
     public int[] getNumbers() {
-        return numbers;
+        return numbers.clone();
     }
 }
