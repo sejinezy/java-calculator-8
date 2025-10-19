@@ -16,7 +16,7 @@ public class Numbers {
         int[] ints = new int[tokens.length];
 
         for (int i = 0; i < tokens.length; i++) {
-            String t = tokens[i];
+            String t = tokens[i].trim();
 
             if (t.isBlank()) {
                 throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");
