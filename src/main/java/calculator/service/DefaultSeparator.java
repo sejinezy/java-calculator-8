@@ -3,6 +3,9 @@ package calculator.service;
 import java.util.regex.Pattern;
 
 public class DefaultSeparator implements Separator {
+    private static final String ERR_INVALID_CUSTOM_FORMAT = "커스텀 구분자 형식이 틀렸습니다.";
+    private static final String ERR_CUSTOM_TOO_LONG = "커스텀 구분자는 문자 1개여야합니다.";
+    private static final String ERR_CUSTOM_DIGIT = "커스텀 구분자는 숫자가 될 수 없습니다.";
 
     private static final String DEFAULT_SEPARATOR = "[,:]";
     private static final String CUSTOM_PREFIX_HEADER = "//";
@@ -35,11 +38,11 @@ public class DefaultSeparator implements Separator {
             }
 
             if (customPrefixHeaderIndex == -1) {
-                throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
+                throw new IllegalArgumentException(ERR_INVALID_CUSTOM_FORMAT);
             }
 
             if (customPrefixHeaderIndex > 3) {
-                throw new IllegalArgumentException("커스텀 구분자는 문자 1개여야합니다.");
+                throw new IllegalArgumentException(ERR_CUSTOM_TOO_LONG);
             }
         }
         return false;
@@ -47,7 +50,7 @@ public class DefaultSeparator implements Separator {
 
     private void validate(char delim) {
         if (Character.isDigit(delim)) {
-            throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
+            throw new IllegalArgumentException(ERR_CUSTOM_DIGIT);
         }
     }
 

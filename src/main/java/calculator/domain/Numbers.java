@@ -1,6 +1,9 @@
 package calculator.domain;
 
 public class Numbers {
+    private static final String ERR_EMPTY = "빈 값은 허용되지 않습니다.";
+    private static final String ERR_NOT_NUMBER = "숫자만 입력할 수 있습니다.";
+    private static final String ERR_NEGATIVE = "음수는 허용되지 않습니다.";
 
     private final int[] numbers;
 
@@ -19,7 +22,7 @@ public class Numbers {
             String t = tokens[i].trim();
 
             if (t.isBlank()) {
-                throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");
+                throw new IllegalArgumentException(ERR_EMPTY);
             }
 
             int value;
@@ -27,11 +30,11 @@ public class Numbers {
             try {
                 value = Integer.parseInt(t);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+                throw new IllegalArgumentException(ERR_NOT_NUMBER);
             }
 
             if (value < 0) {
-                throw new IllegalArgumentException("음수는 허용되지 않습니다.");
+                throw new IllegalArgumentException(ERR_NEGATIVE);
             }
             ints[i] = value;
         }
