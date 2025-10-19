@@ -1,12 +1,11 @@
 package calculator.service;
 
 import calculator.domain.Numbers;
-import calculator.dto.ResponseDto;
 
 public class PositiveAdder implements Adder {
 
     @Override
-    public ResponseDto add(Numbers numbers) {
+    public int add(Numbers numbers) {
         int[] nums = numbers.getNumbers();
 
         int sum = 0;
@@ -14,7 +13,7 @@ public class PositiveAdder implements Adder {
             sum += num;
         }
 
-        return new ResponseDto(sum);
+        return sum;
     }
 
 }

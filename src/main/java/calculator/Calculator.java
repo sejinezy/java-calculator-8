@@ -32,7 +32,8 @@ public class Calculator {
         Result result = separator.extract(requestDto.getRawInput());
         Numbers numbers = new Numbers(result.regex(), result.numbersPart());
 
-        ResponseDto responseDto = adder.add(numbers);
+        int sum = adder.add(numbers);
+        ResponseDto responseDto = new ResponseDto(sum);
         outputView.print(responseDto);
     }
 }
