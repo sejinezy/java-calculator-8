@@ -1,40 +1,41 @@
 package calculator.domain;
 
 import calculator.dto.RequestDto;
-import calculator.service.Separator;
 
 public class Numbers {
 
-    private String[] numbers;
+    private int[] numbers;
 
 
-    public void extract(RequestDto requestDto, Separator separator) {
+    public void extract(RequestDto requestDto, String separator) {
         String rawInput = requestDto.getRawInput();
-        String sep = separator.getSeparator();
 
-        String[] strings;
-        if (sep.equals("[,|:]")) {
-            strings = rawInput.split(sep);
+        String[] tokens;
+        if (separator.equals("[,|:]")) {
+            tokens = rawInput.split(separator);
         } else {
-            strings = rawInput.substring(5).split(sep);
+            tokens = rawInput.substring(5).split(separator);
         }
 
-        validate(strings);
+        numbers = parseAndValidate(tokens);
 
-        numbers = strings;
     }
 
-    private void validate(String[] strings) {
+    private int[] parseAndValidate(String[] tokens) {
 
-        for (String s : strings) {
-            if (s.isBlank()) {
+        int[] ints = new int[tokens.length];
+
+        for (int i = 0; i < tokens.length; i++) {
+            String t = tokens[i];
+
+            if (t.isBlank()) {
                 throw new IllegalArgumentException("빈 값은 허용되지 않습니다.");
             }
 
             int value;
 
             try {
-                value = Integer.parseInt(s);
+                value = Integer.parseInt(t);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
             }
@@ -42,10 +43,12 @@ public class Numbers {
             if (value < 0) {
                 throw new IllegalArgumentException("음수는 허용되지 않습니다.");
             }
+            ints[i] = value;
         }
+        return ints;
     }
 
-    public String[] getNumbers() {
+    public int[] getNumbers() {
         return numbers;
     }
 }
