@@ -1,25 +1,21 @@
 package calculator.domain;
 
-import calculator.dto.RequestDto;
-
 public class Numbers {
 
-    private int[] numbers;
+    private final int[] numbers;
 
-
-    public void extract(RequestDto requestDto, String separator) {
-        String rawInput = requestDto.getRawInput();
-
+    public Numbers(String rawInput, String separator) {
         String[] tokens;
+
         if (separator.equals("[,|:]")) {
             tokens = rawInput.split(separator);
         } else {
-            tokens = rawInput.substring(5).split(separator);
+            int index = rawInput.indexOf("\\n");
+            tokens = rawInput.substring(index + 2).split(separator);
         }
-
         numbers = parseAndValidate(tokens);
-
     }
+
 
     private int[] parseAndValidate(String[] tokens) {
 
