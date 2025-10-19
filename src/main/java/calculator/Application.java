@@ -9,14 +9,12 @@ import calculator.domain.Numbers;
 import calculator.dto.RequestDto;
 import calculator.dto.ResponseDto;
 import calculator.service.Adder;
-import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
 
-        InputView.guide();
-        String rawInput = Console.readLine();
+        String rawInput = InputView.readLine();
         String normalized = InputNormalizer.normalizeBlankToZero(rawInput);
         RequestDto requestDto = new RequestDto(normalized);
 
