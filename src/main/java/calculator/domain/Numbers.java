@@ -9,7 +9,7 @@ public class Numbers {
 
     public Numbers(String regex, String numbersPart) {
         String[] tokens;
-        tokens = numbersPart.split(regex);
+        tokens = numbersPart.split(regex, -1);
         numbers = parseAndValidate(tokens);
     }
 
