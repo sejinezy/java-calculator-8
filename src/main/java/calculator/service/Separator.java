@@ -1,18 +1,15 @@
 package calculator.service;
 
-import calculator.dto.RequestDto;
 import java.util.regex.Pattern;
 
 public class Separator {
 
-    private String separator;
+    private static final String DEFAULT_SEPARATOR = "[,|:]";
 
-    public Separator() {
-        separator = "[,|:]";
+    private Separator() {
     }
 
-    public void extract(RequestDto requestDto) {
-        String rawInput = requestDto.getRawInput();
+    public static String extract(String rawInput) {
 
         if (rawInput.startsWith("//")
                 && rawInput.indexOf("\\n") == 3) {
@@ -20,8 +17,9 @@ public class Separator {
             char delim = rawInput.charAt(2);
             validate(delim);
 
-            separator = Pattern.quote(String.valueOf(delim));
+            return Pattern.quote(String.valueOf(delim));
         }
+        return DEFAULT_SEPARATOR;
     }
 
     private static void validate(char delim) {
@@ -29,10 +27,5 @@ public class Separator {
             throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
         }
     }
-
-    public String getSeparator() {
-        return separator;
-    }
-
 
 }
