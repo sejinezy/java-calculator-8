@@ -16,7 +16,7 @@ public class Numbers {
 
     private int[] parseAndValidate(String[] tokens) {
 
-        int[] ints = new int[tokens.length];
+        int[] parsedNumbers = new int[tokens.length];
 
         for (int i = 0; i < tokens.length; i++) {
             String t = tokens[i].trim();
@@ -36,9 +36,9 @@ public class Numbers {
             if (value < 0) {
                 throw new IllegalArgumentException(ERR_NEGATIVE);
             }
-            ints[i] = value;
+            parsedNumbers[i] = value;
         }
-        return ints;
+        return parsedNumbers;
     }
 
     public int[] getNumbers() {
